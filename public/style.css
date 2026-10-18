@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #f1eded;
+}
+h2, p {
+    margin: 0;
+}
+
+a,
+a:hover {
+    color: #f1eded;
+    text-decoration: none;
+}
+
+body {
+    background-color: #000;
+    background-image: url(https://i.redd.it/wvjxthcs02i41.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.sidebar {
+    border-right: 2px solid rgba(240, 248, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+article {
+    border-bottom: 1px solid rgba(240, 248, 255, 0.2);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 0 5px;
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+header h2 {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+main {
+    width: 100%;
+    max-width: 760px;
+}
+
+main.row {
+    --bs-gutter-x: 35px;
+    --bs-gutter-y: 35px;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    border: solid rgba(240, 248, 255, 0.3) 1px;
+    border-radius: 20px;
+    background-color: rgba(14, 14, 14, 0.4);
+    backdrop-filter: blur(6px);
+    transition: all 0.3s ease;
+    height: 150px;
+}
+
+.box a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.box:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.7);
+    transform: translateY(-5px);
+}
+
+#home img,
+#login img {
+    width: 36px;
+    height: auto;
+}
+
+article a:hover {
+    transition: 0.5s;
+    transform: scale(1.15);
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9rem;
+    background-color: black;
+    border: solid 1px rgba(0, 0, 0, 0.246);
+    border-radius: 20px;
+    opacity: 55%;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.919);
+}
+
+
+
