@@ -1,0 +1,257 @@
+/* =========================================================
+   Sekiro - Detalhes do personagem | detalhes.css
+   Usa as variáveis de cor e fonte definidas no style.css
+   ========================================================= */
+
+main {
+    gap: 20px;
+}
+
+/* ---------- Link de voltar ---------- */
+
+.voltar {
+    align-self: flex-start;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: var(--texto-suave);
+    transition: color var(--transicao), transform var(--transicao);
+}
+
+.voltar:hover {
+    color: var(--carmesim-claro);
+    transform: translateX(-4px);
+}
+
+/* ---------- Perfil ---------- */
+
+.perfil {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    overflow: hidden;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    background-color: var(--vidro);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    animation: surgir 0.6s ease both;
+}
+
+@keyframes surgir {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.perfil-foto {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 520px;
+    background: linear-gradient(160deg, rgba(179, 32, 42, 0.3), rgba(0, 0, 0, 0.7));
+    border-right: 1px solid var(--borda);
+}
+
+/* Inicial gigante quando não tem imagem */
+.perfil-foto::before {
+    content: attr(data-inicial);
+    position: absolute;
+    font-family: var(--fonte-titulo);
+    font-size: 10rem;
+    font-weight: 800;
+    opacity: 0.18;
+}
+
+.perfil-foto img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Sombra que funde a foto com o texto */
+.perfil-foto::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 60%, rgba(11, 10, 9, 0.7));
+    pointer-events: none;
+}
+
+.perfil-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    padding: 40px 44px;
+}
+
+.perfil-info h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    line-height: 1.1;
+    margin: 10px 0 0;
+    background: linear-gradient(180deg, #fff 30%, var(--dourado));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.perfil-info h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--dourado);
+    margin: 0;
+}
+
+.perfil-info .cla {
+    margin: 0;
+}
+
+.divisor {
+    width: 80px;
+    height: 2px;
+    margin: 18px 0;
+    background: linear-gradient(90deg, var(--carmesim), transparent);
+}
+
+.perfil-descricao {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(236, 230, 220, 0.9);
+    margin: 0 0 20px;
+}
+
+/* ---------- Ficha (lista de detalhes) ---------- */
+
+.ficha {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--borda);
+}
+
+.ficha li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--borda);
+}
+
+.ficha .rotulo {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+}
+
+.ficha .valor {
+    text-align: right;
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+}
+
+/* ---------- Anterior / Próximo ---------- */
+
+.navegacao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.navegacao a {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 16px 20px;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    background-color: var(--vidro);
+    transition: all var(--transicao);
+}
+
+.navegacao a.proximo {
+    text-align: right;
+}
+
+.navegacao small {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+}
+
+.navegacao span {
+    font-family: var(--fonte-titulo);
+    font-size: 1.05rem;
+}
+
+.navegacao a:hover {
+    border-color: var(--carmesim-claro);
+    box-shadow: 0 6px 18px rgba(179, 32, 42, 0.3);
+    transform: translateY(-3px);
+}
+
+/* ---------- Não encontrado ---------- */
+
+.nao-encontrado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 60px 20px;
+    text-align: center;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    background-color: var(--vidro);
+}
+
+.nao-encontrado h1 {
+    font-size: 1.8rem;
+}
+
+.nao-encontrado .btn-detalhes {
+    align-self: center;
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 767.98px) {
+    .perfil {
+        grid-template-columns: 1fr;
+    }
+
+    .perfil-foto {
+        min-height: 320px;
+        border-right: none;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    .perfil-foto::after {
+        background: linear-gradient(180deg, transparent 60%, rgba(11, 10, 9, 0.7));
+    }
+
+    .perfil-info {
+        padding: 24px 20px;
+    }
+
+    .perfil-info h1 {
+        font-size: 2rem;
+    }
+
+    .navegacao {
+        grid-template-columns: 1fr;
+    }
+
+    .navegacao a.proximo {
+        text-align: left;
+    }
+}

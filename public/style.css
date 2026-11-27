@@ -207,8 +207,7 @@ footer p {
 
 /* ---------- Seções (vidro) ---------- */
 
-.secao,
-.modal-vidro {
+.secao {
     border: 1px solid var(--borda);
     border-radius: var(--raio);
     background-color: var(--vidro);
@@ -529,27 +528,6 @@ footer p {
     margin-top: 8px;
     padding: 6px 18px;
     font-size: 0.8rem;
-}
-
-/* ---------- Modal ---------- */
-
-.modal-backdrop.show {
-    opacity: 0.75;
-}
-
-.modal-vidro {
-    background-color: var(--vidro-forte);
-    backdrop-filter: blur(14px);
-    color: var(--texto);
-}
-
-.modal-vidro .card-personagem {
-    background-color: transparent;
-    border: none;
-}
-
-.modal-vidro .descricao {
-    font-size: 1.05rem;
 }
 
 /* ---------- Celular ---------- */

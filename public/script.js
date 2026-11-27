@@ -8,9 +8,9 @@ function inicial(nome) {
     return nome.trim().charAt(0).toUpperCase();
 }
 
-// Link que abre os detalhes em outra aba (usa a posição do personagem na lista)
-function linkDetalhes(i) {
-    return `<a class="btn-detalhes" href="detalhes.html?id=${i}" target="_blank" rel="noopener">Detalhes</a>`;
+// Link que abre os detalhes em outra aba (usa o id do dados.js)
+function linkDetalhes(id) {
+    return `<a class="btn-detalhes" href="detalhes.html?id=${id}" target="_blank" rel="noopener">Detalhes</a>`;
 }
 
 function criarSlide(p, i) {
@@ -32,7 +32,7 @@ function criarSlide(p, i) {
                     <h4>${p.titulo}</h4>
                     <p class="cla">${p.cla}</p>
                     <p class="descricao resumo">${p.descricao}</p>
-                    ${linkDetalhes(i)}
+                    ${linkDetalhes(p.id)}
                 </div>
             </div>
         </div>`);
@@ -48,7 +48,7 @@ function criarMiniCard(p, i) {
         <div class="mini-info">
             <h5>${p.nome}</h5>
             <span>${p.papel}</span>
-            ${linkDetalhes(i)}
+            ${linkDetalhes(p.id)}
         </div>`;
 
     // Clicar no card leva o carrossel até o personagem
