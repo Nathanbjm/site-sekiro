@@ -1,117 +1,633 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: #f1eded;
-}
-h2, p {
-    margin: 0;
+/* =========================================================
+   Sekiro - Personagens | style.css
+   Tema: tinta escura, vermelho carmesim e dourado envelhecido
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Noto+Sans:wght@300;400;600&display=swap");
+
+:root {
+    --fundo: #0b0a09;
+    --vidro: rgba(14, 12, 11, 0.6);
+    --vidro-forte: rgba(14, 12, 11, 0.85);
+    --borda: rgba(214, 190, 150, 0.22);
+    --borda-forte: rgba(214, 190, 150, 0.55);
+    --texto: #ece6dc;
+    --texto-suave: rgba(236, 230, 220, 0.7);
+    --carmesim: #b3202a;
+    --carmesim-claro: #e0434c;
+    --dourado: #c9a96a;
+    --raio: 18px;
+    --transicao: 0.3s ease;
+    --fonte-titulo: "Shippori Mincho", serif;
+    --fonte-texto: "Noto Sans", sans-serif;
 }
 
-a,
-a:hover {
-    color: #f1eded;
-    text-decoration: none;
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 body {
-    background-color: #000;
-    background-image: url(https://i.redd.it/wvjxthcs02i41.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--fonte-texto);
+    color: var(--texto);
+    background-color: var(--fundo);
+    background-image:
+        radial-gradient(ellipse at 15% 0%, rgba(179, 32, 42, 0.25), transparent 55%),
+        radial-gradient(ellipse at 90% 100%, rgba(201, 169, 106, 0.12), transparent 50%),
+        linear-gradient(180deg, #14110f 0%, #0b0a09 100%);
+    background-attachment: fixed;
 }
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+}
+
+a {
+    color: var(--texto);
+    text-decoration: none;
+}
+
+::selection {
+    background: var(--carmesim);
+    color: #fff;
+}
+
+/* Barra de rolagem */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--fundo); }
+::-webkit-scrollbar-thumb {
+    background: rgba(214, 190, 150, 0.25);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--carmesim); }
+
+/* ---------- Sidebar ---------- */
 
 .sidebar {
-    border-right: 2px solid rgba(240, 248, 255, 0.2);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--vidro-forte);
+    backdrop-filter: blur(12px);
+    border-right: 1px solid var(--borda);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-width: 150px;
+    z-index: 100;
 }
 
-article {
-    border-bottom: 1px solid rgba(240, 248, 255, 0.2);
-    font-size: 0.9rem;
-    text-align: center;
-    padding: 0 5px;
+.sidebar nav article a {
+    position: relative;
+    display: inline-block;
+    padding: 6px 4px;
+    font-family: var(--fonte-titulo);
+    font-size: 1.05rem;
+    letter-spacing: 1.5px;
+    color: var(--texto-suave);
+    transition: color var(--transicao);
+}
+
+/* Traço de "pincel" que aparece ao passar o mouse */
+.sidebar nav article a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--carmesim);
+    transform: translateX(-50%);
+    transition: width var(--transicao);
+}
+
+.sidebar nav article a:hover {
+    color: var(--texto);
+}
+
+.sidebar nav article a:hover::after {
+    width: 100%;
+}
+
+#home a::after {
+    display: none;
+}
+
+#home img {
+    width: 80px;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(179, 32, 42, 0.5));
+    transition: transform var(--transicao), filter var(--transicao);
+}
+
+#home img:hover {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 14px rgba(224, 67, 76, 0.8));
+}
+
+#login {
+    margin-top: auto;
+}
+
+#login img {
+    width: 38px;
+    height: 38px;
+    padding: 6px;
+    border: 1px solid var(--borda-forte);
+    border-radius: 50%;
+    opacity: 0.85;
+    transition: all var(--transicao);
+}
+
+#login img:hover {
+    opacity: 1;
+    border-color: var(--carmesim-claro);
+    box-shadow: 0 0 12px rgba(224, 67, 76, 0.5);
+}
+
+/* ---------- Conteúdo ---------- */
+
+.content {
+    min-width: 0; /* evita estouro horizontal no flex */
 }
 
 header {
     text-align: center;
-    padding: 20px 0;
+    margin-bottom: 28px;
 }
 
 header h2 {
-    font-size: 2.2rem;
-    letter-spacing: 1px;
+    display: inline-block;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin: 0;
+    padding-bottom: 10px;
+    background: linear-gradient(180deg, #fff 30%, var(--dourado));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+}
+
+header h2::after {
+    content: "";
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--carmesim), transparent);
 }
 
 main {
     width: 100%;
-    max-width: 760px;
-}
-
-main.row {
-    --bs-gutter-x: 35px;
-    --bs-gutter-y: 35px;
-}
-
-.box {
+    max-width: 1000px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0;
-    border: solid rgba(240, 248, 255, 0.3) 1px;
-    border-radius: 20px;
-    background-color: rgba(14, 14, 14, 0.4);
-    backdrop-filter: blur(6px);
-    transition: all 0.3s ease;
-    height: 150px;
-}
-
-.box a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 0 16px;
-    font-size: 1.15rem;
-    line-height: 1.5;
-    font-weight: 500;
-}
-
-.box:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.7);
-    transform: translateY(-5px);
-}
-
-#home img,
-#login img {
-    width: 36px;
-    height: auto;
-}
-
-article a:hover {
-    transition: 0.5s;
-    transform: scale(1.15);
+    flex-direction: column;
+    gap: 28px;
 }
 
 footer {
-    margin-top: 20px;
+    margin-top: 32px;
+    padding-top: 16px;
     text-align: center;
-    padding: 15px;
-    font-size: 0.9rem;
-    background-color: black;
-    border: solid 1px rgba(0, 0, 0, 0.246);
-    border-radius: 20px;
-    opacity: 55%;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: var(--texto-suave);
+    border-top: 1px solid var(--borda);
 }
 
 footer p {
-    color: rgba(255, 255, 255, 0.919);
+    margin: 0;
 }
 
+/* ---------- Seções (vidro) ---------- */
 
+.secao,
+.modal-vidro {
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    background-color: var(--vidro);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
 
+.secao {
+    padding: 24px;
+}
+
+.titulo-secao {
+    position: relative;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    padding-left: 16px;
+}
+
+.titulo-secao::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 4px;
+    border-radius: 2px;
+    background: var(--carmesim);
+}
+
+/* ---------- Carrossel ---------- */
+
+#carrosselPersonagens {
+    padding: 0 56px 40px;
+}
+
+.card-personagem {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    min-height: 380px;
+    border: 1px solid var(--borda);
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.foto {
+    position: relative;
+    flex: 0 0 38%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, rgba(179, 32, 42, 0.25), rgba(0, 0, 0, 0.6));
+    border-right: 1px solid var(--borda);
+}
+
+.foto::before {
+    content: attr(data-inicial);
+    position: absolute;
+    font-family: var(--fonte-titulo);
+    font-size: 6rem;
+    font-weight: 800;
+    opacity: 0.2;
+}
+
+.foto img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Escurece a borda da foto para fundir com o texto */
+.foto::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 70%, rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+}
+
+.info {
+    flex: 1;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
+.papel {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    color: var(--carmesim-claro);
+    border: 1px solid rgba(224, 67, 76, 0.6);
+    border-radius: 20px;
+    background: rgba(179, 32, 42, 0.12);
+}
+
+.info h3 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin: 8px 0 0;
+}
+
+.info h4 {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--dourado);
+    margin: 0;
+}
+
+.cla {
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+}
+
+.descricao {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(236, 230, 220, 0.88);
+    margin: 10px 0;
+}
+
+.descricao.resumo {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.info ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 6px 0 0;
+}
+
+.info li {
+    font-size: 0.78rem;
+    padding: 5px 12px;
+    border-radius: 12px;
+    background-color: rgba(201, 169, 106, 0.08);
+    border: 1px solid rgba(201, 169, 106, 0.3);
+}
+
+/* ---------- Botão ---------- */
+
+.btn-detalhes {
+    align-self: flex-start;
+    margin-top: 12px;
+    padding: 8px 24px;
+    font-family: var(--fonte-titulo);
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    color: var(--texto);
+    background-color: transparent;
+    border: 1px solid var(--borda-forte);
+    border-radius: 20px;
+    transition: all var(--transicao);
+}
+
+.btn-detalhes:hover {
+    background-color: var(--carmesim);
+    border-color: var(--carmesim-claro);
+    box-shadow: 0 6px 18px rgba(179, 32, 42, 0.45);
+    transform: translateY(-3px);
+}
+
+.btn-detalhes:focus-visible {
+    outline: 2px solid var(--dourado);
+    outline-offset: 3px;
+}
+
+/* ---------- Controles do carrossel ---------- */
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 44px;
+    height: 44px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: -20px;
+    border-radius: 50%;
+    border: 1px solid var(--borda-forte);
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0.85;
+    transition: all var(--transicao);
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+    background-color: var(--carmesim);
+    border-color: var(--carmesim-claro);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.carousel-indicators {
+    margin-bottom: 0;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--texto);
+    opacity: 0.35;
+    transition: all var(--transicao);
+}
+
+.carousel-indicators .active {
+    width: 26px;
+    border-radius: 5px;
+    background-color: var(--carmesim-claro);
+    opacity: 1;
+}
+
+/* ---------- Grid de personagens ---------- */
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 18px;
+}
+
+.mini-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    background-color: rgba(14, 12, 11, 0.5);
+    backdrop-filter: blur(6px);
+    transition: all var(--transicao);
+}
+
+.mini-card:hover {
+    border-color: var(--borda-forte);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(179, 32, 42, 0.4);
+    transform: translateY(-6px);
+}
+
+.mini-card.selecionado {
+    border-color: var(--carmesim-claro);
+    box-shadow: 0 0 0 2px rgba(224, 67, 76, 0.45), 0 0 22px rgba(179, 32, 42, 0.35);
+}
+
+.mini-foto {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(160deg, rgba(179, 32, 42, 0.22), rgba(0, 0, 0, 0.6));
+    border-bottom: 1px solid var(--borda);
+}
+
+.mini-foto::before {
+    content: attr(data-inicial);
+    position: absolute;
+    font-family: var(--fonte-titulo);
+    font-size: 4rem;
+    font-weight: 800;
+    opacity: 0.2;
+}
+
+.mini-foto img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.mini-card:hover .mini-foto img {
+    transform: scale(1.07);
+}
+
+.mini-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 12px 16px;
+    text-align: center;
+}
+
+.mini-info h5 {
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+.mini-info span {
+    font-size: 0.7rem;
+    color: var(--dourado);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.mini-info .btn-detalhes {
+    align-self: center;
+    margin-top: 8px;
+    padding: 6px 18px;
+    font-size: 0.8rem;
+}
+
+/* ---------- Modal ---------- */
+
+.modal-backdrop.show {
+    opacity: 0.75;
+}
+
+.modal-vidro {
+    background-color: var(--vidro-forte);
+    backdrop-filter: blur(14px);
+    color: var(--texto);
+}
+
+.modal-vidro .card-personagem {
+    background-color: transparent;
+    border: none;
+}
+
+.modal-vidro .descricao {
+    font-size: 1.05rem;
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        height: auto;
+        min-width: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    .sidebar nav article a {
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+
+    #home img {
+        width: 44px;
+    }
+
+    #login {
+        margin-top: 0;
+    }
+
+    #login img {
+        width: 32px;
+        height: 32px;
+    }
+
+    header h2 {
+        font-size: 1.7rem;
+        letter-spacing: 2px;
+    }
+
+    .secao {
+        padding: 14px;
+    }
+
+    #carrosselPersonagens {
+        padding: 0 0 36px;
+    }
+
+    .card-personagem {
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    .foto {
+        flex: none;
+        height: 260px;
+        border-right: none;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    .foto::after {
+        background: linear-gradient(180deg, transparent 70%, rgba(0, 0, 0, 0.5));
+    }
+
+    .info {
+        padding: 20px;
+    }
+
+    .info h3 {
+        font-size: 1.5rem;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
+
+    #grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .mini-info h5 {
+        font-size: 0.9rem;
+    }
+}
